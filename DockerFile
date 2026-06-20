@@ -1,17 +1,21 @@
-FROM php:8.4-cli-alpine
+FROM php:8.4-cli
 
-RUN apk add --no-cache \
-    postgresql-dev \
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+# Install system dependencies including libjpeg
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    libpq-dev \
     libpng-dev \
     libzip-dev \
     libxml2-dev \
-    oniguruma-dev \
-    icu-dev \
-    autoconf \
-    g++ \
-    make
-
-RUN docker-php-ext-install \
+    libonig-dev \
+    libicu-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    && docker-php-ext-configure gd --with-jpeg --with-freetype \
+    && docker-php-ext-install \
     pdo_pgsql \
     pgsql \
     mbstring \
@@ -20,7 +24,8 @@ RUN docker-php-ext-install \
     bcmath \
     gd \
     zip \
-    intl
+    intl \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
@@ -34,4 +39,4 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 EXPOSE 8000
 
-CMD [ "php", "artisan", "serve", "--host=0.0.0.0", "--port=8000" ]
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
