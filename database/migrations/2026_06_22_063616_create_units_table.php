@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('symbol');
-            $table->json('data');
+            $table->json('data')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

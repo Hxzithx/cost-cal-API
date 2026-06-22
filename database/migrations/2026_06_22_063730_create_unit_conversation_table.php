@@ -16,6 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('parent_unit_id');
             $table->unsignedBigInteger('child_unit_id');
             $table->decimal('factor', 12, 4);
+            $table->json('data')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreignId('parent_unit_id')->references('id')->on('units')->onDelete('cascade');

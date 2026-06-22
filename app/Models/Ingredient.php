@@ -18,4 +18,8 @@ class Ingredient extends Model
         'wastage_sell_unit_id',
         'data',
     ];
+
+    protected $casts = [
+        'data' => 'array',
+    ];
 }

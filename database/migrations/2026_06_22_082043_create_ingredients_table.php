@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('purchase_unit_id')->constrained('units')->onDelete('restrict');
             $table->decimal('wastage_sell_price', 12, 4)->default(0.0000);
             $table->unsignedBigInteger('wastage_sell_unit_id')->nullable()->constrained('units')->onDelete('restrict');
-            $table->json('data');
+            $table->json('data')->nullable();
             $table->timestamps();
         });
     }

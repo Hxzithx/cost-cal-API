@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('unit', ['Kg', 'g', 'Dozen', 'pcs', 'L', 'ml']);
             $table->decimal('default_wastage_quantity', 12, 4)->default(0.0000);
             $table->enum('wastage_unit', ['Kg', 'g', 'Dozen', 'pcs', 'L', 'ml'])->nullable();
-            $table->json('data');
+            $table->json('data')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

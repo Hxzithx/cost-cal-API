@@ -20,5 +20,6 @@ class DishIngredient extends Pivot
     protected $casts = [
         'quantity' => 'decimal:4',
         'default_wastage_quantity' => 'decimal:4',
+        'data' => 'array',
     ];
 }

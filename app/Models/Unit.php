@@ -14,4 +14,19 @@ class Unit extends Model
         'symbol',
         'data',
     ];
+
+    protected $casts = [
+        'data' => 'array',
+    ];
+
+    public function asParentConversions()
+    {
+        return $this->hasMany(UnitConversion::class, 'parent_unit_id');
+    }
+
+    public function asChildConversions()
+    {
+        return $this->hasMany(UnitConversion::class, 'child_unit_id');
+    }
+
 }

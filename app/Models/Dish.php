@@ -17,4 +17,8 @@ class Dish extends Model
         'description',
         'data',
     ];
+
+    protected $casts = [
+        'data' => 'array',
+    ];
 }
