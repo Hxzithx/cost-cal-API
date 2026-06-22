@@ -20,8 +20,13 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreignId('parent_unit_id')->references('id')->on('units')->onDelete('cascade');
-            $table->foreignId('child_unit_id')->references('id')->on('units')->onDelete('cascade');
+            $table->foreign('parent_unit_id')
+                ->references('id')->on('units')
+                ->onDelete('cascade');
+
+            $table->foreign('child_unit_id')
+                ->references('id')->on('units')
+                ->onDelete('cascade');
 
             $table->unique(['parent_unit_id', 'child_unit_id']);
         });
