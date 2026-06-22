@@ -13,10 +13,15 @@ return new class extends Migration
     {
         Schema::create('unit_conversation', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('parent_unit_id')->constrained('units')->onDelete('cascade');
-            $table->unsignedBigInteger('child_unit_id')->constrained('units')->onDelete('cascade');
+            $table->unsignedBigInteger('parent_unit_id');
+            $table->unsignedBigInteger('child_unit_id');
             $table->decimal('factor', 12, 4);
             $table->timestamps();
+
+            $table->foreignId('parent_unit_id')->references('id')->on('units')->onDelete('cascade');
+            $table->foreignId('child_unit_id')->references('id')->on('units')->onDelete('cascade');
+
+            $table->unique(['parent_unit_id', 'child_unit_id']);
         });
     }
 
