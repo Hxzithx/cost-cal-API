@@ -13,13 +13,23 @@ return new class extends Migration
     {
         Schema::create('dish_ingredient', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('dish_id')->constrained('dishes')->onDelete('cascade');
-            $table->unsignedBigInteger('ingredient_id')->constrained('ingredients')->onDelete('cascade');
+            $table->unsignedBigInteger('dish_id');
+            $table->unsignedBigInteger('ingredient_id');
             $table->decimal('quantity', 12, 4);
-            $table->unsignedBigInteger('unit_id')->constrained('units')->onDelete('restrict');
-            $table->decimal('wastage_quantity', 12, 4)->default(0.0000);
-            $table->unsignedBigInteger('wastage_unit_id')->nullable()->constrained('units')->onDelete('restrict');
+            $table->enum('unit', ['Kg', 'g', 'Dozen', 'pcs', 'L', 'ml']);
+            $table->decimal('default_wastage_quantity', 12, 4)->default(0.0000);
+            $table->enum('wastage_unit', ['Kg', 'g', 'Dozen', 'pcs', 'L', 'ml'])->nullable();
+            $table->json('data');
+            $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('dish_id')
+                ->references('id')->on('dishes')
+                ->onDelete('cascade');
+
+            $table->foreign('ingredient_id')
+                ->references('id')->on('ingredients')
+                ->onDelete('cascade');
 
             $table->unique(['dish_id', 'ingredient_id']);
         });
