@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Dish;
 use App\Models\OverheadCost;
 use Exception;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -38,6 +37,7 @@ class OverheadCostController extends Controller
             'expense_name' => 'required|string|max:255',
             'monthly_cost' => 'required|numeric|min:0',
             'monthly_yield' => 'required|numeric|min:0',
+            'data' => 'array|nullable',
          ]);
 
          $overheadCost = $dish->overheadCosts()->create($fields);
@@ -86,6 +86,7 @@ class OverheadCostController extends Controller
             'expense_name' => 'sometimes|required|string|max:255',
             'monthly_cost' => 'sometimes|required|numeric|min:0',
             'monthly_yield' => 'sometimes|required|numeric|min:0',
+            'data' => 'sometimes|array|nullable',
          ]);
 
          $overheadCost->update($fields);
