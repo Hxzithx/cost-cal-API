@@ -14,7 +14,7 @@ public function up(): void
     Schema::create('ingredients', function (Blueprint $table) {
         $table->id();
         $table->string('name');
-        $table->string('external_id')->nullable()->unique(); // maps to the ID from the other system
+        $table->string('external_id')->nullable()->unique(); 
         $table->boolean('is_active')->default(true);
         $table->json('data')->nullable();
         $table->softDeletes();

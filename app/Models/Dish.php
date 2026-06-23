@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Category;
 
 class Dish extends Model
 {
@@ -25,6 +26,11 @@ class Dish extends Model
     public function dishIngredients()
     {
         return $this->hasMany(DishIngredient::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 
     public function ingredients()
