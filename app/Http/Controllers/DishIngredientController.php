@@ -6,7 +6,6 @@ use App\Models\Dish;
 use App\Models\DishIngredient;
 use App\Models\Ingredient;
 use Exception;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
