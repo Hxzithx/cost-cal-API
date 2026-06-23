@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\SyncsIsDeleteFlag;
 
 class OverheadCost extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SyncsIsDeleteFlag;
 
     protected $table = "overhead_costs";
 
@@ -17,6 +18,7 @@ class OverheadCost extends Model
         'monthly_cost',
         'monthly_yield',
         'data',
+        'is_delete',
     ];
 
     protected $casts = [

@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Category;
+use App\Traits\SyncsIsDeleteFlag;
 
 class Dish extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SyncsIsDeleteFlag;
 
     protected $table = 'dishes';
 
@@ -19,6 +20,7 @@ class Dish extends Model
         'name',
         'description',
         'data',
+        'is_delete',
     ];
 
     protected $casts = [

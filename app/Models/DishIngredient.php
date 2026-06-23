@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\SyncsIsDeleteFlag;
 
 class DishIngredient extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SyncsIsDeleteFlag;
 
     protected $table = 'dish_ingredient';
 
@@ -22,6 +23,7 @@ class DishIngredient extends Model
         'wastage_unit_id',
         'default_wastage_sell_price',
         'data',
+        'is_delete',
     ];
 
     protected $casts = [

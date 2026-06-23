@@ -4,15 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\SyncsIsDeleteFlag;
 
 class Category extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SyncsIsDeleteFlag;
 
     protected $fillable = [
         'name',
         'data',
         'is_active',
+        'is_delete',
     ];
 
     protected $casts = [

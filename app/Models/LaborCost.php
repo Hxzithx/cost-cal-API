@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\SyncsIsDeleteFlag;
 
 class LaborCost extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SyncsIsDeleteFlag;
 
     protected $table = "labor_costs";
     protected $fillable = [
@@ -17,6 +18,7 @@ class LaborCost extends Model
         'monthly_hours',
         'prep_time_minutes',
         'data',
+        'is_delete',
     ];
 
     protected $casts = [

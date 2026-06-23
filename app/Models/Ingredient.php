@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\SyncsIsDeleteFlag;
 
 class Ingredient extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SyncsIsDeleteFlag;
 
     protected $table = "ingredients";
     protected $fillable = [
@@ -15,6 +16,7 @@ class Ingredient extends Model
         'external_id',
         'is_active',
         'data',
+        'is_delete',
     ];
 
     protected $casts = [
