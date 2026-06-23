@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DishController;
 use App\Http\Controllers\DishIngredientController;
 use Illuminate\Http\Request;
@@ -23,4 +24,12 @@ Route::prefix('/dish-ingredient/{dish_id}')->group(function () {
     Route::put('{dishingredient}', [DishIngredientController::class, 'update']);
     Route::get('/{dishingredient}', [DishIngredientController::class, 'show']);
     Route::delete('/{dishingredient}', [DishIngredientController::class, 'delete']);
+});
+
+Route::prefix('/categories')->group(function () {
+    Route::get('/', [CategoryController::class, 'index']);
+    Route::post('/', [CategoryController::class, 'store']);
+    Route::put('/{category_id}', [CategoryController::class, 'update']);
+    Route::get('/{category_id}', [CategoryController::class, 'show']);
+    Route::delete('/{category_id}', [CategoryController::class, 'delete']);
 });
