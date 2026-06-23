@@ -9,6 +9,7 @@ class LaborCost extends Model
 {
     use SoftDeletes;
 
+    protected $table = "labor_costs";
     protected $fillable = [
         'dish_id',
         'role_name',

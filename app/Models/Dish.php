@@ -13,6 +13,8 @@ class Dish extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'dishes';
+
     protected $fillable = [
         'name',
         'description',

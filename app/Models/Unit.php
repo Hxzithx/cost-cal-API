@@ -12,6 +12,8 @@ class Unit extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'units';
+
     protected $fillable = [
         'name',
         'symbol',

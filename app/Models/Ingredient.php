@@ -9,6 +9,7 @@ class Ingredient extends Model
 {
     use SoftDeletes;
 
+    protected $table = "ingredients";
     protected $fillable = [
         'name',
         'external_id',

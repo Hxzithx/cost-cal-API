@@ -9,6 +9,8 @@ class UnitConversion extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'unit_conversation';
+
     protected $fillable = [
         'parent_unit_id',
         'child_unit_id',
