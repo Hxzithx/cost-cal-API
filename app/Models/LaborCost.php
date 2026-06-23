@@ -26,6 +26,28 @@ class LaborCost extends Model
         'data' => 'array',
     ];
 
+    protected static function booted(): void
+    {
+        static::creating(function ($laborCost) {
+            $laborCost->data = self::buildData($laborCost);
+        });
+
+        static::updating(function ($laborCost) {
+            $laborCost->data = self::buildData($laborCost);
+        });
+    }
+
+    private static function buildData($laborCost): array
+    {
+        return [
+            'dish_id'           => $laborCost->dish_id,
+            'role_name'         => $laborCost->role_name,
+            'monthly_salary'    => $laborCost->monthly_salary,
+            'monthly_hours'     => $laborCost->monthly_hours,
+            'prep_time_minutes' => $laborCost->prep_time_minutes,
+        ];
+    }
+
     protected $appends = ['hourly_rate', 'cost_per_portion'];
 
     public function dish()

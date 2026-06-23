@@ -23,6 +23,26 @@ class UnitConversion extends Model
         'data' => 'array',
     ];
 
+    protected static function booted(): void
+    {
+        static::creating(function ($unitConversion) {
+            $unitConversion->data = self::buildData($unitConversion);
+        });
+
+        static::updating(function ($unitConversion) {
+            $unitConversion->data = self::buildData($unitConversion);
+        });
+    }
+
+    private static function buildData($unitConversion): array
+    {
+        return [
+            'parent_unit_id' => $unitConversion->parent_unit_id,
+            'child_unit_id'  => $unitConversion->child_unit_id,
+            'factor'         => $unitConversion->factor,
+        ];
+    }
+
     protected $appends = ['representation'];
 
     public function parentUnit()

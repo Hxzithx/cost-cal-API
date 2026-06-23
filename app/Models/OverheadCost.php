@@ -25,6 +25,27 @@ class OverheadCost extends Model
         'data' => 'array',
     ];
 
+    protected static function booted(): void
+    {
+        static::creating(function ($overheadCost) {
+            $overheadCost->data = self::buildData($overheadCost);
+        });
+
+        static::updating(function ($overheadCost) {
+            $overheadCost->data = self::buildData($overheadCost);
+        });
+    }
+
+    private static function buildData($overheadCost): array
+    {
+        return [
+            'dish_id'      => $overheadCost->dish_id,
+            'expense_name' => $overheadCost->expense_name,
+            'monthly_cost' => $overheadCost->monthly_cost,
+            'monthly_yield' => $overheadCost->monthly_yield,
+        ];
+    }
+
     protected $appends = ['cost_per_portion'];
 
     public function dish()

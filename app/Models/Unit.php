@@ -24,6 +24,25 @@ class Unit extends Model
         'data' => 'array',
     ];
 
+    protected static function booted(): void
+    {
+        static::creating(function ($unit) {
+            $unit->data = self::buildData($unit);
+        });
+
+        static::updating(function ($unit) {
+            $unit->data = self::buildData($unit);
+        });
+    }
+
+    private static function buildData($unit): array
+    {
+        return [
+            'name'   => $unit->name,
+            'symbol' => $unit->symbol,
+        ];
+    }
+
     public function asParentConversions()
     {
         return $this->hasMany(UnitConversion::class, 'parent_unit_id');

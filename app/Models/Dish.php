@@ -25,6 +25,26 @@ class Dish extends Model
         'data' => 'array',
     ];
 
+    protected static function booted(): void
+    {
+        static::creating(function ($dish) {
+            $dish->data = self::buildData($dish);
+        });
+
+        static::updating(function ($dish) {
+            $dish->data = self::buildData($dish);
+        });
+    }
+
+    private static function buildData($dish): array
+    {
+        return [
+            'name'        => $dish->name,
+            'category_id' => $dish->category_id,
+            'description' => $dish->description,
+        ];
+    }
+
     public function dishIngredients()
     {
         return $this->hasMany(DishIngredient::class);

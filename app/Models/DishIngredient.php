@@ -32,6 +32,32 @@ class DishIngredient extends Model
         'data' => 'array',
     ];
 
+    protected static function booted(): void
+    {
+        static::creating(function ($dishIngredient) {
+            $dishIngredient->data = self::buildData($dishIngredient);
+        });
+
+        static::updating(function ($dishIngredient) {
+            $dishIngredient->data = self::buildData($dishIngredient);
+        });
+    }
+
+    private static function buildData($dishIngredient): array
+    {
+        return [
+            'dish_id'                    => $dishIngredient->dish_id,
+            'ingredient_id'              => $dishIngredient->ingredient_id,
+            'default_recipe_qty'         => $dishIngredient->default_recipe_qty,
+            'unit_id'                    => $dishIngredient->unit_id,
+            'default_cost_per_unit'      => $dishIngredient->default_cost_per_unit,
+            'cost_unit_id'               => $dishIngredient->cost_unit_id,
+            'default_wastage_qty'        => $dishIngredient->default_wastage_qty,
+            'wastage_unit_id'            => $dishIngredient->wastage_unit_id,
+            'default_wastage_sell_price' => $dishIngredient->default_wastage_sell_price,
+        ];
+    }
+
     public function dish()
     {
         return $this->belongsTo(Dish::class);

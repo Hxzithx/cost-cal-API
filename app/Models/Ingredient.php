@@ -21,6 +21,26 @@ class Ingredient extends Model
         'data' => 'array',
     ];
 
+    protected static function booted(): void
+    {
+        static::creating(function ($ingredient) {
+            $ingredient->data = self::buildData($ingredient);
+        });
+
+        static::updating(function ($ingredient) {
+            $ingredient->data = self::buildData($ingredient);
+        });
+    }
+
+    private static function buildData($ingredient): array
+    {
+        return [
+            'name'        => $ingredient->name,
+            'external_id' => $ingredient->external_id,
+            'is_active'   => $ingredient->is_active,
+        ];
+    }
+
     public function dishIngredients()
     {
         return $this->hasMany(DishIngredient::class);
