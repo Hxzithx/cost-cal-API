@@ -10,7 +10,6 @@ class Ingredient extends Model
 {
     use SoftDeletes, SyncsIsDeleteFlag;
 
-    protected $table = "ingredients";
     protected $fillable = [
         'name',
         'external_id',
@@ -21,6 +20,7 @@ class Ingredient extends Model
 
     protected $casts = [
         'data' => 'array',
+        'is_active' => 'boolean',
     ];
 
     protected static function booted(): void
@@ -37,23 +37,14 @@ class Ingredient extends Model
     private static function buildData($ingredient): array
     {
         return [
-            'name'        => $ingredient->name,
+            'name' => $ingredient->name,
             'external_id' => $ingredient->external_id,
-            'is_active'   => $ingredient->is_active,
+            'is_active' => $ingredient->is_active,
         ];
     }
 
     public function dishIngredients()
     {
         return $this->hasMany(DishIngredient::class);
-    }
-
-    // Handy when syncing from the external system — avoids creating duplicates
-    public static function findOrCreateFromExternal(string $externalId, string $name): self
-    {
-        return self::firstOrCreate(
-            ['external_id' => $externalId],
-            ['name' => $name, 'is_active' => true]
-        );
     }
 }

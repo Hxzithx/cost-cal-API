@@ -10,7 +10,7 @@ class UnitConversion extends Model
 {
     use SoftDeletes, SyncsIsDeleteFlag;
 
-    protected $table = 'unit_conversation';
+    protected $table = 'unit_conversions';
 
     protected $fillable = [
         'parent_unit_id',
@@ -25,27 +25,27 @@ class UnitConversion extends Model
         'data' => 'array',
     ];
 
+    protected $appends = ['representation'];
+
     protected static function booted(): void
     {
-        static::creating(function ($unitConversion) {
-            $unitConversion->data = self::buildData($unitConversion);
+        static::creating(function ($conversion) {
+            $conversion->data = self::buildData($conversion);
         });
 
-        static::updating(function ($unitConversion) {
-            $unitConversion->data = self::buildData($unitConversion);
+        static::updating(function ($conversion) {
+            $conversion->data = self::buildData($conversion);
         });
     }
 
-    private static function buildData($unitConversion): array
+    private static function buildData($conversion): array
     {
         return [
-            'parent_unit_id' => $unitConversion->parent_unit_id,
-            'child_unit_id'  => $unitConversion->child_unit_id,
-            'factor'         => $unitConversion->factor,
+            'parent_unit_id' => $conversion->parent_unit_id,
+            'child_unit_id' => $conversion->child_unit_id,
+            'factor' => $conversion->factor,
         ];
     }
-
-    protected $appends = ['representation'];
 
     public function parentUnit()
     {

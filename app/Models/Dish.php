@@ -2,29 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Category;
 use App\Traits\SyncsIsDeleteFlag;
 
 class Dish extends Model
 {
     use SoftDeletes, SyncsIsDeleteFlag;
 
-    protected $table = 'dishes';
-
     protected $fillable = [
         'name',
+        'category_id',
         'description',
+        'is_active',
         'data',
         'is_delete',
     ];
 
     protected $casts = [
         'data' => 'array',
+        'is_active' => 'boolean',
     ];
 
     protected static function booted(): void
@@ -41,10 +38,16 @@ class Dish extends Model
     private static function buildData($dish): array
     {
         return [
-            'name'        => $dish->name,
+            'name' => $dish->name,
             'category_id' => $dish->category_id,
             'description' => $dish->description,
+            'is_active' => $dish->is_active,
         ];
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 
     public function dishIngredients()
@@ -52,9 +55,16 @@ class Dish extends Model
         return $this->hasMany(DishIngredient::class);
     }
 
-    public function category()
+    public function ingredients()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Ingredient::class, 'dish_ingredient')
+            ->withPivot([
+                'default_recipe_qty', 'unit_id',
+                'default_cost_per_unit', 'cost_unit_id',
+                'default_wastage_qty', 'wastage_unit_id',
+                'default_wastage_sell_price',
+            ])
+            ->withTimestamps();
     }
 
     public function overheadCosts()
@@ -65,20 +75,5 @@ class Dish extends Model
     public function laborCosts()
     {
         return $this->hasMany(LaborCost::class);
-    }
-
-    public function ingredients()
-    {
-        return $this->belongsToMany(Ingredient::class, 'dish_ingredient')
-            ->withPivot([
-                'default_recipe_qty',
-                'unit_id',
-                'default_cost_per_unit',
-                'cost_unit_id',
-                'default_wastage_qty',
-                'wastage_unit_id',
-                'default_wastage_sell_price',
-            ])
-            ->withTimestamps();
     }
 }

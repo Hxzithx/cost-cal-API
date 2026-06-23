@@ -10,7 +10,6 @@ class LaborCost extends Model
 {
     use SoftDeletes, SyncsIsDeleteFlag;
 
-    protected $table = "labor_costs";
     protected $fillable = [
         'dish_id',
         'role_name',
@@ -28,29 +27,29 @@ class LaborCost extends Model
         'data' => 'array',
     ];
 
+    protected $appends = ['hourly_rate', 'cost_per_portion'];
+
     protected static function booted(): void
     {
-        static::creating(function ($laborCost) {
-            $laborCost->data = self::buildData($laborCost);
+        static::creating(function ($labor) {
+            $labor->data = self::buildData($labor);
         });
 
-        static::updating(function ($laborCost) {
-            $laborCost->data = self::buildData($laborCost);
+        static::updating(function ($labor) {
+            $labor->data = self::buildData($labor);
         });
     }
 
-    private static function buildData($laborCost): array
+    private static function buildData($labor): array
     {
         return [
-            'dish_id'           => $laborCost->dish_id,
-            'role_name'         => $laborCost->role_name,
-            'monthly_salary'    => $laborCost->monthly_salary,
-            'monthly_hours'     => $laborCost->monthly_hours,
-            'prep_time_minutes' => $laborCost->prep_time_minutes,
+            'dish_id' => $labor->dish_id,
+            'role_name' => $labor->role_name,
+            'monthly_salary' => $labor->monthly_salary,
+            'monthly_hours' => $labor->monthly_hours,
+            'prep_time_minutes' => $labor->prep_time_minutes,
         ];
     }
-
-    protected $appends = ['hourly_rate', 'cost_per_portion'];
 
     public function dish()
     {

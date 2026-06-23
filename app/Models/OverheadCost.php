@@ -10,8 +10,6 @@ class OverheadCost extends Model
 {
     use SoftDeletes, SyncsIsDeleteFlag;
 
-    protected $table = "overhead_costs";
-
     protected $fillable = [
         'dish_id',
         'expense_name',
@@ -27,28 +25,28 @@ class OverheadCost extends Model
         'data' => 'array',
     ];
 
+    protected $appends = ['cost_per_portion'];
+
     protected static function booted(): void
     {
-        static::creating(function ($overheadCost) {
-            $overheadCost->data = self::buildData($overheadCost);
+        static::creating(function ($overhead) {
+            $overhead->data = self::buildData($overhead);
         });
 
-        static::updating(function ($overheadCost) {
-            $overheadCost->data = self::buildData($overheadCost);
+        static::updating(function ($overhead) {
+            $overhead->data = self::buildData($overhead);
         });
     }
 
-    private static function buildData($overheadCost): array
+    private static function buildData($overhead): array
     {
         return [
-            'dish_id'      => $overheadCost->dish_id,
-            'expense_name' => $overheadCost->expense_name,
-            'monthly_cost' => $overheadCost->monthly_cost,
-            'monthly_yield' => $overheadCost->monthly_yield,
+            'dish_id' => $overhead->dish_id,
+            'expense_name' => $overhead->expense_name,
+            'monthly_cost' => $overhead->monthly_cost,
+            'monthly_yield' => $overhead->monthly_yield,
         ];
     }
-
-    protected $appends = ['cost_per_portion'];
 
     public function dish()
     {
