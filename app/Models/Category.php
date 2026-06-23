@@ -12,13 +12,14 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'data',
         'is_active',
+        'data',
         'is_delete',
     ];
 
     protected $casts = [
         'data' => 'array',
+        'is_active' => 'boolean',
     ];
 
     protected static function booted(): void
@@ -35,7 +36,7 @@ class Category extends Model
     private static function buildData($category): array
     {
         return [
-            'name'      => $category->name,
+            'name' => $category->name,
             'is_active' => $category->is_active,
         ];
     }

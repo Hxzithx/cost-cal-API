@@ -10,8 +10,6 @@ class Unit extends Model
 {
     use SoftDeletes, SyncsIsDeleteFlag;
 
-    protected $table = 'units';
-
     protected $fillable = [
         'name',
         'symbol',
@@ -37,18 +35,8 @@ class Unit extends Model
     private static function buildData($unit): array
     {
         return [
-            'name'   => $unit->name,
+            'name' => $unit->name,
             'symbol' => $unit->symbol,
         ];
-    }
-
-    public function asParentConversions()
-    {
-        return $this->hasMany(UnitConversion::class, 'parent_unit_id');
-    }
-
-    public function asChildConversions()
-    {
-        return $this->hasMany(UnitConversion::class, 'child_unit_id');
     }
 }
