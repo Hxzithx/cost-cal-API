@@ -13,5 +13,5 @@ Route::prefix('/dish')->group(function () {
    Route::post('/create', [DishController::class, 'store']);
    Route::patch('/update', [DishController::class, 'update']);
    Route::get('/{dish_id}', [DishController::class, 'show']);
-   Route::delete('/delete', [DishController::class, 'delete']);
+   Route::delete('/delete/{dish_id}', [DishController::class, 'delete']);
 });
