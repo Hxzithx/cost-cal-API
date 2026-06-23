@@ -34,6 +34,7 @@ class DishController extends Controller
       try {
          $fields = $request->validate([
             'name' => 'required|string|max:255|unique:dishes,name',
+            'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
             'data' => 'nullable|array',
             'is_active' => 'boolean',
@@ -83,6 +84,7 @@ class DishController extends Controller
       try {
          $fields = $request->validate([
             'name' => 'sometimes|required|string|max:255|unique:dishes,name,' . $dish->id,
+            'category_id' => 'sometimes|required|exists:categories,id',
             'description' => 'sometimes|nullable|string',
             'data' => 'sometimes|nullable|array',
             'is_active' => 'boolean',
