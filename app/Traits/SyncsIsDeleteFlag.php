@@ -6,11 +6,19 @@ trait SyncsIsDeleteFlag
 {
     protected static function bootSyncsIsDeleteFlag(): void
     {
-        static::deleting(function ($model) {
-            $model->is_delete = true;
+        static::deleted(function ($model) {
+            $model->newQueryWithoutScopes()
+                ->whereKey($model->getKey())
+                ->update(['is_delete' => true]);
+
+            $model->is_delete = true; 
         });
 
-        static::restoring(function ($model) {
+        static::restored(function ($model) {
+            $model->newQueryWithoutScopes()
+                ->whereKey($model->getKey())
+                ->update(['is_delete' => false]);
+
             $model->is_delete = false;
         });
     }
