@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Unit;
 use Exception;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
