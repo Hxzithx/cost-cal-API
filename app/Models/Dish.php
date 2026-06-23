@@ -21,4 +21,24 @@ class Dish extends Model
     protected $casts = [
         'data' => 'array',
     ];
+
+    public function dishIngredients()
+    {
+        return $this->hasMany(DishIngredient::class);
+    }
+
+    public function ingredients()
+    {
+        return $this->belongsToMany(Ingredient::class, 'dish_ingredient')
+            ->withPivot([
+                'default_recipe_qty',
+                'unit_id',
+                'default_cost_per_unit',
+                'cost_unit_id',
+                'default_wastage_qty',
+                'wastage_unit_id',
+                'default_wastage_sell_price',
+            ])
+            ->withTimestamps();
+    }
 }
