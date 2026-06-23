@@ -33,6 +33,16 @@ class Dish extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function overheadCosts()
+    {
+        return $this->hasMany(OverheadCost::class);
+    }
+
+    public function laborCosts()
+    {
+        return $this->hasMany(LaborCost::class);
+    }
+
     public function ingredients()
     {
         return $this->belongsToMany(Ingredient::class, 'dish_ingredient')
