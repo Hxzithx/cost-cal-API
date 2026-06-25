@@ -10,6 +10,8 @@ class Ingredient extends Model
 {
     use SoftDeletes, SyncsIsDeleteFlag;
 
+    protected $table = 'ingredients';
+
     protected $fillable = [
         'name',
         'external_id',

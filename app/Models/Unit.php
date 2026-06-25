@@ -10,6 +10,8 @@ class Unit extends Model
 {
     use SoftDeletes, SyncsIsDeleteFlag;
 
+    protected $table = 'units';
+
     protected $fillable = [
         'name',
         'symbol',

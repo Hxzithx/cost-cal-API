@@ -10,6 +10,8 @@ class LaborCost extends Model
 {
     use SoftDeletes, SyncsIsDeleteFlag;
 
+    protected $table = 'labor_costs';
+
     protected $fillable = [
         'dish_id',
         'role_name',

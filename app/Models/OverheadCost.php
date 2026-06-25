@@ -10,6 +10,8 @@ class OverheadCost extends Model
 {
     use SoftDeletes, SyncsIsDeleteFlag;
 
+    protected $table = 'overhead_costs';
+
     protected $fillable = [
         'dish_id',
         'expense_name',
