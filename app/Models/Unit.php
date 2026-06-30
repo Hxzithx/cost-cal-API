@@ -34,7 +34,7 @@ class Unit extends Model
         });
     }
 
-    private static function buildData($unit): array
+    public static function buildData($unit): array
     {
         return [
             'name' => $unit->name,

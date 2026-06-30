@@ -35,7 +35,7 @@ class Dish extends Model
         });
     }
 
-    private static function buildData($dish): array
+    public static function buildData($dish): array
     {
         return [
             'name' => $dish->name,

@@ -38,7 +38,7 @@ class UnitConversion extends Model
         });
     }
 
-    private static function buildData($conversion): array
+    public static function buildData($conversion): array
     {
         return [
             'parent_unit_id' => $conversion->parent_unit_id,

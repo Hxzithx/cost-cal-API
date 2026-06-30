@@ -42,7 +42,7 @@ class LaborCost extends Model
         });
     }
 
-    private static function buildData($labor): array
+    public static function buildData($labor): array
     {
         return [
             'dish_id' => $labor->dish_id,

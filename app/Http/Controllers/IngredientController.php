@@ -45,6 +45,7 @@ class IngredientController extends Controller
             'cost_unit_id' => 'nullable|exists:units,id',
             'supplier_name' => 'nullable|string|max:255',
             'is_active' => 'boolean',
+            'data' => 'array|nullable',
          ]);
 
          $ingredient = Ingredient::create($fields);
@@ -102,6 +103,7 @@ class IngredientController extends Controller
             'cost_unit_id' => 'sometimes|nullable|exists:units,id',
             'supplier_name' => 'sometimes|nullable|string|max:255',
             'is_active' => 'boolean',
+            'data' => 'sometimes|array|nullable',
          ]);
 
          $ingredient->update($fields);

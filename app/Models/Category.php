@@ -33,7 +33,7 @@ class Category extends Model
         });
     }
 
-    private static function buildData($category): array
+    public static function buildData($category): array
     {
         return [
             'name' => $category->name,

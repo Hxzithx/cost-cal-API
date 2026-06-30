@@ -4,8 +4,10 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DishController;
 use App\Http\Controllers\DishIngredientController;
 use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\LaborCostController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UnitConversionController;
+use App\Http\Controllers\OverheadCostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -59,5 +61,21 @@ Route::prefix('/unit-conversations')->group(function () {
     Route::get('/{unitConversion}', [UnitConversionController::class, 'show']);
     Route::put('/{unitConversion}', [UnitConversionController::class, 'update']);
     Route::delete('/{unitConversion}', [UnitConversionController::class, 'destroy']);
+});
+
+Route::prefix('labor-costs/{dish}')->group(function () {
+    Route::get('/', [LaborCostController::class, 'index']);
+    Route::post('/', [LaborCostController::class, 'store']);
+    Route::get('/{laborCost}', [LaborCostController::class, 'show']);
+    Route::put('/{laborCost}', [LaborCostController::class, 'update']);
+    Route::delete('/{laborCost}', [LaborCostController::class, 'destroy']);
+});
+
+Route::prefix('overhead-costs/{dish}')->group(function () {
+    Route::get('/', [OverheadCostController::class, 'index']);
+    Route::post('/', [OverheadCostController::class, 'store']);
+    Route::get('/{overheadCost}', [OverheadCostController::class, 'show']);
+    Route::put('/{overheadCost}', [OverheadCostController::class, 'update']);
+    Route::delete('/{overheadCost}', [OverheadCostController::class, 'destroy']);
 });
 

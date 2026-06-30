@@ -40,7 +40,7 @@ class OverheadCost extends Model
         });
     }
 
-    private static function buildData($overhead): array
+    public static function buildData($overhead): array
     {
         return [
             'dish_id' => $overhead->dish_id,

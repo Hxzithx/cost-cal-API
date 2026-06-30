@@ -49,7 +49,7 @@ class Ingredient extends Model
         });
     }
 
-    private static function buildData($ingredient): array
+    public static function buildData($ingredient): array
     {
         return [
             'name' => $ingredient->name,

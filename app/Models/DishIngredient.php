@@ -45,7 +45,7 @@ class DishIngredient extends Model
         });
     }
 
-    private static function buildData($dishIngredient): array
+    public static function buildData($dishIngredient): array
     {
         return [
             'dish_id'                    => $dishIngredient->dish_id,
