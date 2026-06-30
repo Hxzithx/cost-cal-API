@@ -8,6 +8,7 @@ use App\Http\Controllers\LaborCostController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UnitConversionController;
 use App\Http\Controllers\OverheadCostController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -77,5 +78,13 @@ Route::prefix('overhead-costs/{dish}')->group(function () {
     Route::get('/{overheadCost}', [OverheadCostController::class, 'show']);
     Route::put('/{overheadCost}', [OverheadCostController::class, 'update']);
     Route::delete('/{overheadCost}', [OverheadCostController::class, 'destroy']);
+});
+
+Route::prefix('/suppliers')->group(function () {
+    Route::get('/', [SupplierController::class, 'index']);
+    Route::post('/', [SupplierController::class, 'store']);
+    Route::put('/{supplier}', [SupplierController::class, 'update']);
+    Route::get('/{supplier}', [SupplierController::class, 'show']);
+    Route::delete('/{supplier}', [SupplierController::class, 'destroy']);
 });
 
