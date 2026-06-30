@@ -43,7 +43,7 @@ class IngredientController extends Controller
             'wastage_per_unit' => 'nullable|numeric|min:0',
             'cost_per_unit' => 'nullable|numeric|min:0',
             'cost_unit_id' => 'nullable|exists:units,id',
-            'supplier_name' => 'nullable|string|max:255',
+            'supplier_id' => 'nullable|string|exists:suppliers,id',
             'is_active' => 'boolean',
             'data' => 'array|nullable',
          ]);
@@ -101,7 +101,7 @@ class IngredientController extends Controller
             'wastage_per_unit' => 'sometimes|nullable|numeric|min:0',
             'cost_per_unit' => 'sometimes|nullable|numeric|min:0',
             'cost_unit_id' => 'sometimes|nullable|exists:units,id',
-            'supplier_name' => 'sometimes|nullable|string|max:255',
+            'supplier_id' => 'sometimes|nullable|string|exists:suppliers,id',
             'is_active' => 'boolean',
             'data' => 'sometimes|array|nullable',
          ]);

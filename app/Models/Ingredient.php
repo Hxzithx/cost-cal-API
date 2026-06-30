@@ -23,7 +23,7 @@ class Ingredient extends Model
         'wastage_per_unit',
         'cost_per_unit',
         'cost_unit_id',
-        'supplier_name',
+        'supplier_id',
         'is_active',
         'data',
         'is_delete',
@@ -62,7 +62,7 @@ class Ingredient extends Model
             'wastage_per_unit' => $ingredient->wastage_per_unit,
             'cost_per_unit' => $ingredient->cost_per_unit,
             'cost_unit_id' => $ingredient->cost_unit_id,
-            'supplier_name' => $ingredient->supplier_name,
+            'supplier_id' => $ingredient->supplier_id,
             'is_active' => $ingredient->is_active,
         ];
     }
@@ -70,5 +70,10 @@ class Ingredient extends Model
     public function dishIngredients()
     {
         return $this->hasMany(DishIngredient::class);
+    }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
     }
 }
