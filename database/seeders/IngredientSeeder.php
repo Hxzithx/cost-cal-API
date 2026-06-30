@@ -13,7 +13,7 @@ class IngredientSeeder extends Seeder
     public function run(): void
     {
         $ingredients = [
-            ['name' => 'Basmati Rice', 'external_id' => 'ING-RICE-01', 'description' => 'Premium quality aged long-grain rice.', 'stock_qty' => 150, 'min_level_qty' => 20, 'cost_per_unit' => 200.00, 'supplier_name' => 'Heritage Grains', 'is_active' => true],
+            ['name' => 'Basmati Rice', 'external_id' => 'ING-RICE-01', 'description' => 'Premium quality aged long-grain rice.', 'stock_qty' => 150, 'min_level_qty' => 20, 'cost_per_unit' => 200.00, 'is_active' => true],
             ['name' => 'Eggs', 'external_id' => 'ING-EGG-02', 'is_active' => true],
             ['name' => 'Soy Sauce', 'external_id' => 'ING-SOY-03', 'is_active' => true],
             ['name' => 'Raw Chicken', 'external_id' => 'ING-CHICK-04', 'is_active' => true],
