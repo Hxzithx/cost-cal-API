@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             UnitSeeder::class,
             UnitConversionSeeder::class,
+            SupplierSeeder::class,
             IngredientSeeder::class,
             DishSeeder::class,
             DishIngredientSeeder::class,
