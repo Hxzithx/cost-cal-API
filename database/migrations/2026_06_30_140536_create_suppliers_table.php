@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('external_id')->nullable()->unique();
+            $table->string('contact_email')->nullable();
+            $table->string('contact_phone')->nullable();
+            $table->boolean('is_active')->default(true);
+            $table->json('data')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
