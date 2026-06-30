@@ -34,8 +34,16 @@ class IngredientController extends Controller
       try {
          $fields = $request->validate([
             'name' => 'required|string|max:255|unique:ingredients,name',
+            'description' => 'nullable|string',
             'external_id' => 'nullable|string|max:255|unique:ingredients,external_id',
-            'data' => 'nullable|array',
+            'category_id' => 'nullable|exists:categories,id',
+            'stock_qty' => 'nullable|numeric|min:0',
+            'stock_unit_id' => 'nullable|exists:units,id',
+            'min_level_qty' => 'nullable|numeric|min:0',
+            'wastage_per_unit' => 'nullable|numeric|min:0',
+            'cost_per_unit' => 'nullable|numeric|min:0',
+            'cost_unit_id' => 'nullable|exists:units,id',
+            'supplier_name' => 'nullable|string|max:255',
             'is_active' => 'boolean',
          ]);
 
@@ -83,8 +91,16 @@ class IngredientController extends Controller
       try {
          $fields = $request->validate([
             'name' => 'sometimes|required|string|max:255|unique:ingredients,name,' . $ingredient->id,
+            'description' => 'sometimes|nullable|string',
             'external_id' => 'sometimes|nullable|string|max:255|unique:ingredients,external_id,' . $ingredient->id,
-            'data' => 'sometimes|nullable|array',
+            'category_id' => 'sometimes|nullable|exists:categories,id',
+            'stock_qty' => 'sometimes|nullable|numeric|min:0',
+            'stock_unit_id' => 'sometimes|nullable|exists:units,id',
+            'min_level_qty' => 'sometimes|nullable|numeric|min:0',
+            'wastage_per_unit' => 'sometimes|nullable|numeric|min:0',
+            'cost_per_unit' => 'sometimes|nullable|numeric|min:0',
+            'cost_unit_id' => 'sometimes|nullable|exists:units,id',
+            'supplier_name' => 'sometimes|nullable|string|max:255',
             'is_active' => 'boolean',
          ]);
 
