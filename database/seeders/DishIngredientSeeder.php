@@ -33,9 +33,19 @@ class DishIngredientSeeder extends Seeder
         $soy = Ingredient::where('name', 'Soy Sauce')->first();
         $chicken = Ingredient::where('name', 'Raw Chicken')->first();
 
+        // Helper closure to create + backfill
+        $createWithData = function (array $fields) {
+            $model = DishIngredient::create($fields);
+
+            $attributes = $model->getAttributes();
+            unset($attributes['created_at'], $attributes['updated_at'], $attributes['deleted_at']);
+
+            $model->updateQuietly(['data' => $attributes]);
+        };
+
         // Attach Basmati Rice
         if ($rice && $g && $kg) {
-            DishIngredient::create([
+            $createWithData([
                 'dish_id' => $friedRice->id,
                 'ingredient_id' => $rice->id,
                 'default_recipe_qty' => 250.0000,
@@ -49,7 +59,7 @@ class DishIngredientSeeder extends Seeder
 
         // Attach Eggs
         if ($eggs && $pcs && $dozen) {
-            DishIngredient::create([
+            $createWithData([
                 'dish_id' => $friedRice->id,
                 'ingredient_id' => $eggs->id,
                 'default_recipe_qty' => 2.0000,
@@ -63,7 +73,7 @@ class DishIngredientSeeder extends Seeder
 
         // Attach Soy Sauce
         if ($soy && $ml && $l) {
-            DishIngredient::create([
+            $createWithData([
                 'dish_id' => $friedRice->id,
                 'ingredient_id' => $soy->id,
                 'default_recipe_qty' => 15.0000,
@@ -77,7 +87,7 @@ class DishIngredientSeeder extends Seeder
 
         // Attach Chicken
         if ($chicken && $g && $kg) {
-            DishIngredient::create([
+            $createWithData([
                 'dish_id' => $friedRice->id,
                 'ingredient_id' => $chicken->id,
                 'default_recipe_qty' => 200.0000,

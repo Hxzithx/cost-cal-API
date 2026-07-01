@@ -22,7 +22,15 @@ class UnitSeeder extends Seeder
         ];
 
         foreach ($units as $unit) {
-            Unit::create($unit);
+            // Create the unit
+            $model = Unit::create($unit);
+
+            // Build snapshot of attributes
+            $attributes = $model->getAttributes();
+            unset($attributes['created_at'], $attributes['updated_at'], $attributes['deleted_at']);
+
+            // Backfill the data column explicitly
+            $model->updateQuietly(['data' => $attributes]);
         }
     }
 }

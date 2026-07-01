@@ -33,7 +33,15 @@ class IngredientSeeder extends Seeder
         ];
 
         foreach ($ingredients as $ingredient) {
-            Ingredient::create($ingredient);
+            // Create the ingredient
+            $model = Ingredient::create($ingredient);
+
+            // Build snapshot of attributes
+            $attributes = $model->getAttributes();
+            unset($attributes['created_at'], $attributes['updated_at'], $attributes['deleted_at']);
+
+            // Backfill the data column explicitly
+            $model->updateQuietly(['data' => $attributes]);
         }
     }
 }

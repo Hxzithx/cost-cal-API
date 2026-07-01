@@ -40,7 +40,15 @@ class OverheadCostSeeder extends Seeder
         ];
 
         foreach ($overheads as $overhead) {
-            OverheadCost::create($overhead);
+            // Create the overhead cost record
+            $model = OverheadCost::create($overhead);
+
+            // Build snapshot of attributes
+            $attributes = $model->getAttributes();
+            unset($attributes['created_at'], $attributes['updated_at'], $attributes['deleted_at']);
+
+            // Backfill the data column explicitly
+            $model->updateQuietly(['data' => $attributes]);
         }
     }
 }

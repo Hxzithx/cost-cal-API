@@ -36,7 +36,15 @@ class LaborCostSeeder extends Seeder
         ];
 
         foreach ($laborCosts as $laborCost) {
-            LaborCost::create($laborCost);
+            // Create the labor cost record
+            $model = LaborCost::create($laborCost);
+
+            // Build snapshot of attributes
+            $attributes = $model->getAttributes();
+            unset($attributes['created_at'], $attributes['updated_at'], $attributes['deleted_at']);
+
+            // Backfill the data column explicitly
+            $model->updateQuietly(['data' => $attributes]);
         }
     }
 }

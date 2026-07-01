@@ -20,7 +20,15 @@ class CategorySeeder extends Seeder
         ];
 
         foreach ($categories as $category) {
-            Category::create($category);
+            // Create the category
+            $model = Category::create($category);
+
+            // Build snapshot of attributes
+            $attributes = $model->getAttributes();
+            unset($attributes['created_at'], $attributes['updated_at'], $attributes['deleted_at']);
+
+            // Backfill the data column explicitly
+            $model->updateQuietly(['data' => $attributes]);
         }
     }
 }
