@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('contact_email')->nullable();
             $table->string('contact_phone')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->json('data')->nullable();
+            $table->jsonb('data')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

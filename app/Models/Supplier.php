@@ -16,7 +16,6 @@ class Supplier extends Model
         'contact_email',
         'contact_phone',
         'is_active',
-        'data',
         'is_delete',
     ];
 
@@ -27,24 +26,22 @@ class Supplier extends Model
 
     protected static function booted(): void
     {
-        static::creating(function ($supplier) {
-            $supplier->data = self::buildData($supplier);
-        });
+        static::saving(function ($supplier) {
+            // Grab all attributes before saving
+            $attributes = $supplier->getAttributes();
 
-        static::updating(function ($supplier) {
-            $supplier->data = self::buildData($supplier);
+            // Optionally remove internal fields you don’t want in JSON
+            unset($attributes['created_at'], $attributes['updated_at'], $attributes['deleted_at']);
+
+            $supplier->data = $attributes;
         });
     }
 
     public static function buildData($supplier): array
     {
-        return [
-            'name' => $supplier->name,
-            'external_id' => $supplier->external_id,
-            'contact_email' => $supplier->contact_email,
-            'contact_phone' => $supplier->contact_phone,
-            'is_active' => $supplier->is_active,
-        ];
+        $attributes = $supplier->getAttributes();
+        unset($attributes['created_at'], $attributes['updated_at'], $attributes['deleted_at']);
+        return $attributes;
     }
 
     public static function findOrCreateFromExternal(string $externalId, string $name): self

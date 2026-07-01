@@ -39,7 +39,6 @@ class SupplierController extends Controller
             'contact_email' => 'nullable|email|max:255',
             'contact_phone' => 'nullable|string|max:50',
             'is_active' => 'boolean',
-            'data' => 'array|nullable',
          ]);
 
          $supplier = Supplier::create($fields);
@@ -90,7 +89,6 @@ class SupplierController extends Controller
             'contact_email' => 'sometimes|nullable|email|max:255',
             'contact_phone' => 'sometimes|nullable|string|max:50',
             'is_active' => 'boolean',
-            'data' => 'sometimes|array|nullable',
          ]);
 
          $supplier->update($fields);
