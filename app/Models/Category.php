@@ -12,6 +12,7 @@ class Category extends Model
 
     protected $fillable = [
         'name',
+        'color',
         'is_active',
         'data',
         'is_delete',
@@ -37,6 +38,7 @@ class Category extends Model
     {
         return [
             'name' => $category->name,
+            'color' => $category->color,
             'is_active' => $category->is_active,
         ];
     }

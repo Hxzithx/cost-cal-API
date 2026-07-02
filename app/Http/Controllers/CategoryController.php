@@ -34,6 +34,7 @@ class CategoryController extends Controller
       try {
          $fields = $request->validate([
             'name' => 'required|string|max:255|unique:categories,name',
+            'color' => 'nullable|string|max:50',
             'data' => 'array|nullable',
             'is_active' => 'boolean',
          ]);
@@ -82,6 +83,7 @@ class CategoryController extends Controller
       try {
          $fields = $request->validate([
             'name' => 'sometimes|required|string|max:255|unique:categories,name,' . $category->id,
+            'color' => 'sometimes|nullable|string|max:50',
             'data' => 'sometimes|array|nullable',
             'is_active' => 'boolean',
          ]);
