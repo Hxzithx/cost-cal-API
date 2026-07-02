@@ -40,7 +40,7 @@ Route::prefix('/ingredients')->group(function () {
     Route::delete('/{ingredient}', [IngredientController::class, 'destroy']);
 });
 
-Route::prefix('/dish-ingredient/{dish_id}')->group(function () {
+Route::prefix('/dish-ingredient/{dish}')->group(function () {
     Route::get('/', [DishIngredientController::class, 'index']);
     Route::post('/', [DishIngredientController::class, 'store']);
     Route::put('{dishIngredient}', [DishIngredientController::class, 'update']);
