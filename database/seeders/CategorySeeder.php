@@ -13,10 +13,10 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['name' => 'Appetizers', 'is_active' => true],
-            ['name' => 'Main Course', 'is_active' => true],
-            ['name' => 'Desserts', 'is_active' => true],
-            ['name' => 'Beverages', 'is_active' => true],
+            ['name' => 'Appetizers', 'color' => 'Red', 'is_active' => true],
+            ['name' => 'Main Course', 'color' => 'Blue', 'is_active' => true],
+            ['name' => 'Desserts', 'color' => 'Yellow', 'is_active' => true],
+            ['name' => 'Beverages', 'color' => 'Indigo', 'is_active' => true],
         ];
 
         foreach ($categories as $category) {
