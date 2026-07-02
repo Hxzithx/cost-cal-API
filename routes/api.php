@@ -9,6 +9,7 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UnitConversionController;
 use App\Http\Controllers\OverheadCostController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\SystemSettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -88,3 +89,7 @@ Route::prefix('/suppliers')->group(function () {
     Route::delete('/{supplier}', [SupplierController::class, 'destroy']);
 });
 
+Route::prefix('/settings')->group(function () {
+    Route::get('/', [SystemSettingController::class, 'show']);
+    Route::put('/', [SystemSettingController::class, 'update']);
+});
