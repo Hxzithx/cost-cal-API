@@ -19,6 +19,7 @@ class OverheadCost extends Model
         'monthly_yield',
         'data',
         'is_delete',
+        'cost_type',
     ];
 
     protected $casts = [
@@ -47,6 +48,7 @@ class OverheadCost extends Model
             'expense_name' => $overhead->expense_name,
             'monthly_cost' => $overhead->monthly_cost,
             'monthly_yield' => $overhead->monthly_yield,
+            'cost_type' => $overhead->cost_type,
         ];
     }
 
@@ -63,4 +65,18 @@ class OverheadCost extends Model
 
         return round($this->monthly_cost / $this->monthly_yield, 2);
     }
+
+    const COST_TYPES = [
+        'rent_lease' => 'Rent / Lease',
+        'utilities' => 'Utilities',
+        'fuel' => 'Fuel',
+        'transport' => 'Transport',
+        'equipment_machine' => 'Equipment / Machine',
+        'insurance' => 'Insurance',
+        'administration' => 'Administration',
+        'maintenance' => 'Maintenance',
+        'subcontract' => 'Subcontract',
+        'finance_charges' => 'Finance Charges',
+        'other' => 'Other',
+    ];
 }

@@ -37,6 +37,7 @@ class OverheadCostController extends Controller
             'expense_name' => 'required|string|max:255',
             'monthly_cost' => 'required|numeric|min:0',
             'monthly_yield' => 'required|numeric|min:0',
+            'cost_type' => 'nullable|in:' . implode(',', array_keys(OverheadCost::COST_TYPES)),
             'data' => 'array|nullable',
          ]);
 
@@ -137,5 +138,13 @@ class OverheadCostController extends Controller
             'error' => $e->getMessage(),
          ], 500);
       }
+   }
+
+   public function costTypes()
+   {
+      return response()->json([
+         'message' => 'Cost types retrieved successfully',
+         'cost_types' => OverheadCost::COST_TYPES,
+      ], 200);
    }
 }
