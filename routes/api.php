@@ -79,6 +79,7 @@ Route::prefix('overhead-costs/{dish}')->group(function () {
     Route::get('/{overheadCost}', [OverheadCostController::class, 'show']);
     Route::put('/{overheadCost}', [OverheadCostController::class, 'update']);
     Route::delete('/{overheadCost}', [OverheadCostController::class, 'destroy']);
+    Route::get('/cost-types', [OverheadCostController::class, 'costTypes']);
 });
 
 Route::prefix('/suppliers')->group(function () {
