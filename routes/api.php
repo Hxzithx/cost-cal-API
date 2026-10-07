@@ -90,7 +90,53 @@ Route::prefix('/suppliers')->group(function () {
     Route::delete('/{supplier}', [SupplierController::class, 'destroy']);
 });
 
+use App\Http\Controllers\StoreLocationController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\GrnRecordController;
+use App\Http\Controllers\GrnBatchController;
+use App\Http\Controllers\ProductionLogController;
+use App\Http\Controllers\PosDailySaleController;
+use App\Http\Controllers\StockMovementController;
+
 Route::prefix('/settings')->group(function () {
     Route::get('/', [SystemSettingController::class, 'show']);
     Route::put('/', [SystemSettingController::class, 'update']);
+});
+
+Route::prefix('/store-locations')->group(function () {
+    Route::get('/', [StoreLocationController::class, 'index']);
+    Route::post('/', [StoreLocationController::class, 'store']);
+    Route::put('/{storeLocation}', [StoreLocationController::class, 'update']);
+});
+
+Route::prefix('/departments')->group(function () {
+    Route::get('/', [DepartmentController::class, 'index']);
+    Route::post('/', [DepartmentController::class, 'store']);
+});
+
+Route::prefix('/grn-records')->group(function () {
+    Route::get('/', [GrnRecordController::class, 'index']);
+    Route::post('/', [GrnRecordController::class, 'store']);
+    Route::put('/{grnRecord}', [GrnRecordController::class, 'update']);
+});
+
+Route::prefix('/batches')->group(function () {
+    Route::get('/', [GrnBatchController::class, 'index']);
+    Route::post('/', [GrnBatchController::class, 'store']);
+    Route::put('/{batch}', [GrnBatchController::class, 'update']);
+});
+
+Route::prefix('/production-logs')->group(function () {
+    Route::get('/', [ProductionLogController::class, 'index']);
+    Route::post('/', [ProductionLogController::class, 'store']);
+});
+
+Route::prefix('/pos-daily-sales')->group(function () {
+    Route::get('/', [PosDailySaleController::class, 'index']);
+    Route::post('/', [PosDailySaleController::class, 'store']);
+});
+
+Route::prefix('/stock-movements')->group(function () {
+    Route::get('/', [StockMovementController::class, 'index']);
+    Route::post('/', [StockMovementController::class, 'store']);
 });

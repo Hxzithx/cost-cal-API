@@ -33,16 +33,21 @@ class CategoryController extends Controller
    {
       try {
          $fields = $request->validate([
-            'name' => 'required|string|max:255|unique:categories,name',
+            'name' => 'required|string|max:255',
             'color' => 'nullable|string|max:50',
             'data' => 'array|nullable',
             'is_active' => 'boolean',
          ]);
 
-         $category = Category::create($fields);
+         $category = Category::whereRaw('LOWER(name) = ?', [strtolower(trim($fields['name']))])->first();
+         if ($category) {
+            $category->update($fields);
+         } else {
+            $category = Category::create($fields);
+         }
 
          return response()->json([
-            'message' => 'Category created successfully',
+            'message' => 'Category saved successfully',
             'category' => $category,
          ], 201);
       } catch (ValidationException $e) {

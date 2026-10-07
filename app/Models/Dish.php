@@ -37,12 +37,13 @@ class Dish extends Model
 
     public static function buildData($dish): array
     {
-        return [
+        $existing = is_array($dish->data) ? $dish->data : [];
+        return array_merge($existing, [
             'name' => $dish->name,
             'category_id' => $dish->category_id,
             'description' => $dish->description,
             'is_active' => $dish->is_active,
-        ];
+        ]);
     }
 
     public function category()
